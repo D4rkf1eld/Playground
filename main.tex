@@ -1,0 +1,77 @@
+                               % PRÄAMBEL              
+\documentclass[10pt]{article}  % article: Typ des LaTeX Dokuments
+\usepackage[ngerman]{babel}    % ngerman: Neue deutsche Rechtschreibung (Silbentrennung u.w.) | babel: Ändert die Spracheinstellungen
+\usepackage[utf8]{inputenc}    % inputenc: Stellt die Zeicheneingabe fuer Umlaute (in den Editor) sicher
+\usepackage[T1]{fontenc}       % T1: Zeichenmenge für westeuropäische Länder | fontenc: Angepasste Zeichendarstellung in der PDF
+                               % PRÄAMBEL
+
+% Ein schönes Template gibt es hier: http://www.latextemplates.com/template/journal-article
+
+\begin{document}
+    \section{Grundlagen \LaTeX} 
+    Diese Übersicht soll das Schreiben nachträglich erleichtern. Für weitere Details schaue bitte in die .tex Datei hinein!
+
+    \subsection{Böse Sachen}
+        Zuerst einmal Sachen die \textbf{NICHT} schön sind:
+        \begin{enumerate}
+            \item Manuelle Leerzeichen mit \textbackslash \textbackslash
+            \item Andauernd \verb!\textbf{...}! verwenden. Lieber Betonungen (emph...)!
+        \end{enumerate} 
+    
+    \subsection{Struktur}
+        Der Textkörper wird mit Abschnitts-Befehlen strukturiert. Diese unterscheiden sich nach Typ des Dokumentes (z.B. \textbf{article}). Jedoch gelten diese Befehle für alle:
+        \begin{itemize}
+            \item \verb!\section!
+            \item \verb!\subsection!
+            \item \verb!\subsubsection!
+        \end{itemize}
+        Für \textbf{book} gilt wiederum:
+        \begin{itemize}
+            \item \verb!\part!
+            \item \verb!\chapter!
+            \item \verb!\paragraph!
+            \item \verb!\subparagraph!
+        \end{itemize}
+
+    \subsection{Zeichen}
+        Folgende Zeichen können \textbf{nicht} einfach so eingetippt werden:
+        \begin{itemize}
+            \item \& \@ \% \@ \$ \@ \# \@ \_ \@ \{ \@ \} \@ \~ \@ \^ \@
+        \end{itemize}
+        Diese können mit der Kombination aus dem \textbackslash \@ Befehl und dem jeweiligen Zeichen erzeugt werden (\em Escape-Befehl\normalfont).  % Hier wird der unäre Befehl genommen (Schalter)
+        Um Leerzeichen zu forcieren kann \verb!\@! benutzt werden. Ein Bindestrich kann mit \verb!--! eingefügt werden.
+
+    \subsection{Textformatierungen}
+        \LaTeX \@ unterstützt folgende physische Textformatierungen:
+        \begin{itemize}
+            \item \verb!\textbf{bold face}! -- \textbf{bold face}
+            \item \verb!\textit{italics}! -- \textit{italics}
+            \item \verb!\textsl{slanted}! -- \textsl{slanted}
+            \item \verb!\textsc{small caps}! -- \textsc{small caps}
+        \end{itemize}
+
+    \subsection{Schriftgrößen}
+    Folgende lokalen Schriftgrößenänderungen sind in \LaTeX \@ möglich:
+    \begin{enumerate}
+        \item \verb!\tiny!
+        \item \verb!\scriptsize!
+        \item \verb!\footnotesize!
+        \item \verb!\small!
+        \item \verb!\normalsize!
+        \item \verb!\large!
+        \item \verb!\Large!
+        \item \verb!\LARGE!
+        \item \verb!\huge!
+        \item \verb!\Huge!
+    \end{enumerate}
+    Um die Schriftgröße für das gesamte Dokument zu ändern gibt es Präambel-Befehle.
+
+    \subsection{Umgebungen}
+    Eine Umgebung schließt einen Text mit \verb!\begin{Umgebung}! und \verb!\end{Umgebung}! ein. Innerhalb der Umgebung gelten eigene und spezielle Regeln. Wichtige Beispiele sind:
+    \begin{itemize}
+        \item enumerate (Aufzählung)
+        \item itemize (Liste)
+        \item equation (mathematische Gleichung)
+        \item description (Lexikon ähnliche Aufzählung)
+    \end{itemize}
+\end{document}
