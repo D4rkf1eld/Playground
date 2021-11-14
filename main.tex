@@ -16,7 +16,15 @@
 
 \begin{document}
     \section{Grundlagen \LaTeX} 
+
+    \subsection{Einführung}
     Diese Übersicht soll das Schreiben nachträglich erleichtern. Für weitere Details schaue bitte in die .tex Datei hinein!
+    \LaTeX \@ ist eine Sammlung von Makros die in \textbf{TeX} programmiert sind. Das zu Grunde liegende \textbf{TeX}-System
+    ist eine Programmiersprache. Es gibt entsprechend für den Anwender viele Elemente einer Programmiersprache um den Textsatz
+    zu gestalten. Mithilfe von \textsl{Variablen} können alle Format-Eigenschaften eines Dokuments programmatisch geändert werden.
+    Hierbei gibt es verschiedene \textsl{Variablentypen}. Wichtig sind die \textsl{Längen-} und \textsl{Zählervariablen}.
+    Diese Variablen können über \LaTeX-Befehle verändert werden. Auf \textbf{TeX}-Ebene gibt es Kontrollstrukturen, also \textsl{if then}
+    Anweisungen, \textsl{Schleifen} und noch vieles mehr.
 
     \subsection{Böse Sachen}
         Zuerst einmal Sachen die \textbf{NICHT} schön sind:
@@ -86,7 +94,7 @@
     Listings enthalten nicht-formatierten Text, der wichtig zur Darstellung von Quellcode jeglicher Programmiersprachen ist.
     \lstset{language=C}
     \begin{lstlisting}[frame=single]
-        int main(int argc, *char argv[]) 
+        int main(int argc, char* argv[]) 
         {
             printf("Hello World!");
         }
@@ -97,4 +105,51 @@
     Mithilfe des \verb!\input{file}! Befehls können weitere \emph{.tex} Dateien in das Dokument so eingefügt werden, als würde der Inhalt der Datei im Originaldokument stehen.
     Dabei können die Pfadangaben \emph{relativ} oder \emph{absolut} sein. Den Unterdokumenten muss eine extra Zeile am Anfang eingefügt werden, die auf das Master Dokument hinweist. Alternativ kann im \emph{TexMaker}
     das Master Dokument über das Menü Optionen eingestellt werden.
+    \subsection{Längen}
+    Mithilfe des \verb!\setlength{variable}{länge}! Befehls können die in \textbf{TeX} auftretenden Längen verändert werden. \textbf{Alle Längen haben eine Einheit!}
+    Wichtige Variablen sind zum Beispiel:
+    \begin{itemize}
+        \item \verb!\parindent! - Definiert den Einzug eines Absatzes
+        \item \verb!\parskip! - Definiert den Abstand zwischen zwei Absätzen
+        \item \verb!\baselineskip! - Der Zeilenabstand
+    \end{itemize}
+    \textbf{Anwendungsbeispiele:}
+    \begin{enumerate}
+        \item \verb!\setlength{\parindent}{10pt}! - Einzug auf 10pt setzen
+        \item \verb!\setlength{\parskip}{0.5\baselineskip}! - Der Abstand zwischen zwei Absätzen wird auf die Höhe einer halben Zeile gesetzt.
+    \end{enumerate}
+    \textsl{Relative Längenangaben} (siehe 2. Beispiel) beziehen sich auf einen Referenzwert. Dieser Bezug erfolgt mithilfe einer Multiplikation (in \LaTeX \@ wird dazu der Multiplikator einfach direkt an den Referenzwert geschrieben). Eine Addition geht nicht. Das wäre Stretching!
+    \textsl{Absolute Längenangaben} werden mit Maßzahl und Einheit (\textbf{WICHTIG!}) direkt angegeben. Es ist sinnvoll \textbf{immer relative Längenangaben} zu nutzen, denn bei einer Änderung des Schriftgrads von 10pt auf bspw. 12pt ändert sich der Abstand zwischen den Absätzen genau richtig mit.
+    Auch erweist sich dies bei der Breite von Bildern und bei der Spaltenweite von Tabellen als besonders hilfreich. Mithilfe des \verb!\the! Befehls können Längen (Wert der Variablen) angezeigt werden.
+    Es gibt viele verschiedene Längeneinheiten:
+    \begin{itemize}
+        \item Punkt - \textbf{pt} - entspricht: \textbf{1pt}
+        \item Millimeter - \textbf{mm} - entspricht: \textbf{2.84pt}
+        \item Zentimeter - \textbf{cm} - entspricht: \textbf{28.4pt}
+        \item Inch - \textbf{in} - entspricht: \textbf{72.27pt}
+    \end{itemize}
+    \textbf{Wichtiger Tipp:}
+    \\
+    Die wichtigsten Längen für die Gestaltung einer Seite können über den \verb!\layout{}! Befehl angezeigt werden. Dazu muss aber vorher das Package \textsl{layout} mit \verb!\usepackage{}! geladen werden.
+    Interessante weitere Längen sind:
+    \begin{itemize}
+        \item \verb!\columnsep!, \verb!\columnwidth! - Bei der mehrspaltigen Gestaltung
+        \item \verb!\tabcolsep! - Für Tabellen
+        \item \verb!\itemsep! - Für Listen
+    \end{itemize}
+    Längen lassen außerdem über diverse Befehle verändern:
+    \begin{itemize}
+        \item \verb!\setlength{\länge}{wert}! - Setzt eine Länge auf einen Wert
+        \item \verb!\addtolength{\länge}{wert}! - Addiert eine Länge zu einem Wert
+        \item \verb!\settowidth{\länge}{beispieltext}! - Breite des Beispieltexts auf \verb!\länge! setzen
+        \item \verb!\settoheigth{\länge}{beispieltext}! - Höhe des Beispieltexts auf \verb!\länge! setzen
+        \item \verb!\settodepth{\länge}{beispieltext}! - Tiefe des Beispieltexts auf \verb!\länge! setzen
+    \end{itemize}
+    Bei letzeren Befehlen wird der Beispieltext jedoch \textbf{NICHT} angezeigt! Interessant ist, dass der Beispieltext selbst das Ergebnis eines Befehls sein kann.
+    \\
+    \\
+    \textbf{Stretching:}
+    \\
+    Um ein schöneres Layout zu erreichen streckt \LaTeX \@ einige Größen. Hierzu zählen der Abstand zwischen Wörtern für Blocksätze und die Abstände zwischen den Absätzen um die Seite optimal auszunutzen. Wenn das nicht klappt, meckert \LaTeX \@ über eine \textsl{overfull} oder \textsl{underfull} \verb!\vbox!.
+
 \end{document}
