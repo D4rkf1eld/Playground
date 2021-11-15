@@ -148,8 +148,36 @@
     Bei letzeren Befehlen wird der Beispieltext jedoch \textbf{NICHT} angezeigt! Interessant ist, dass der Beispieltext selbst das Ergebnis eines Befehls sein kann.
     \\
     \\
-    \textbf{Stretching:}
     \\
     Um ein schöneres Layout zu erreichen streckt \LaTeX \@ einige Größen. Hierzu zählen der Abstand zwischen Wörtern für Blocksätze und die Abstände zwischen den Absätzen um die Seite optimal auszunutzen. Wenn das nicht klappt, meckert \LaTeX \@ über eine \textsl{overfull} oder \textsl{underfull} \verb!\vbox!.
+    \textbf{Eigene Längen definieren:}
+    Eigene Längen können mit dem Befehl \verb!\newlength! definiert werden. Dies kann zum Beispiel bei den Spaltenbreiten von Tabellen im ganzen Dokument, oder für eine einheitliche Breite von Bildern (automatisch skaliert) nützlich sein.
+    Die Verwendung geschieht dabei wie folgt:
+    \lstset{language=TeX}
+    \begin{lstlisting}[frame=single]
+        \newlength{\imgWidth}
+        \setlength{\imgWidth}{0.8\textwidth}
+    \end{lstlisting}
+    Zuerst wird die Länge \textsl{imgWidth} mit \verb!\newlength! erzeugt und dann mit den Längenänderungsbefehlen gesetzt.
+    Alle Bilder im Text können mit dieser Variablen auf 80\% der Textbreite skaliert werden. Um alle Bilder neu zu skalieren, muss nur die 0.8 geändert werden.
+
+    \subsection{Befehle}
+    Mit dem Befehl \verb!\newcommand! lassen sich eigene Befehle definieren.
+    % Interessant: Gesperrtes Leerzeichen, um Umbruch zu verhindern (2. Befehl in lstlisting).
+    \lstset{language=TeX}
+    \begin{lstlisting}[frame=single]
+        \newcommand{\name}{definition}
+        \newcommand{\zB}{z.\,B.\,\@}
+        \newcommand{\abk}{Abkuerzung}
+    \end{lstlisting}
+    In der hier gezeigten Form dienen sie als Abkürzung für häufig auftretende Befehle, die sonst umständlich einzutippen wären.
+    Die fortgeschrittene Variante des \verb!\newcommand! Befehls gebraucht \textbf{Argumente}. So wird der selbst-definierte Befehl zur Funktion.
+    \lstset{language=TeX}
+    \begin{lstlisting}[frame=single]
+        \newcommand{\macheFett}[1]{\textbf{#1}}
+    \end{lstlisting}
+    In der Definition wird über \#1 auf das erste Argument zugegriffen, über \#2 auf das zweite Argument, etc. Dies ist für \textbf{maximal 9 Argumente} möglich!
+
+    % Ab Seite mit \renewcommand weitermachen!
 
 \end{document}
