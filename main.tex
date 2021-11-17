@@ -162,22 +162,103 @@
     Alle Bilder im Text können mit dieser Variablen auf 80\% der Textbreite skaliert werden. Um alle Bilder neu zu skalieren, muss nur die 0.8 geändert werden.
 
     \subsection{Befehle}
-    Mit dem Befehl \verb!\newcommand! lassen sich eigene Befehle definieren.
-    % Interessant: Gesperrtes Leerzeichen, um Umbruch zu verhindern (2. Befehl in lstlisting).
-    \lstset{language=TeX}
-    \begin{lstlisting}[frame=single]
-        \newcommand{\name}{definition}
-        \newcommand{\zB}{z.\,B.\,\@}
-        \newcommand{\abk}{Abkuerzung}
-    \end{lstlisting}
-    In der hier gezeigten Form dienen sie als Abkürzung für häufig auftretende Befehle, die sonst umständlich einzutippen wären.
-    Die fortgeschrittene Variante des \verb!\newcommand! Befehls gebraucht \textbf{Argumente}. So wird der selbst-definierte Befehl zur Funktion.
-    \lstset{language=TeX}
-    \begin{lstlisting}[frame=single]
-        \newcommand{\macheFett}[1]{\textbf{#1}}
-    \end{lstlisting}
-    In der Definition wird über \#1 auf das erste Argument zugegriffen, über \#2 auf das zweite Argument, etc. Dies ist für \textbf{maximal 9 Argumente} möglich!
+        \subsubsection{Eigene Kommandos}
+            Mit dem Befehl \verb!\newcommand! lassen sich eigene Befehle definieren.
+            % Interessant: Gesperrtes Leerzeichen, um Umbruch zu verhindern (2. Befehl in lstlisting).
+            \lstset{language=TeX}
+            \begin{lstlisting}[frame=single]
+                \newcommand{\name}{definition}
+                \newcommand{\zB}{z.\,B.\,\@}
+                \newcommand{\abk}{Abkuerzung}
+            \end{lstlisting}
+            In der hier gezeigten Form dienen sie als Abkürzung für häufig auftretende Befehle, die sonst umständlich einzutippen wären.
+            Die fortgeschrittene Variante des \verb!\newcommand! Befehls gebraucht \textbf{Argumente}. So wird der selbst-definierte Befehl zur Funktion.
+            \lstset{language=TeX}
+            \begin{lstlisting}[frame=single]
+                \newcommand{\macheFett}[1]{\textbf{#1}}
+            \end{lstlisting}
+            In der Definition wird über \#1 auf das erste Argument zugegriffen, über \#2 auf das zweite Argument, etc. Dies ist für \textbf{maximal 9 Argumente} möglich!
+            Möchte man bestehende Befehle verändern, so kann man dies mit dem \verb!\renewcommand! Befehl tun. Die Syntax ist dabei die gleiche, wie bei \verb!\newcommand!. Hierbei können auch \textbf{Argumente} übergeben werden!
+            \lstset{language=TeX}
+            \begin{lstlisting}[frame=single]
+                \renewcommand{\name}[1]{definition}
+                \renewcommand{\em}{\bfseries}
+            \end{lstlisting}
+            Bei dem Beispiel mit dem \verb!\em! geht allerdings durch die Erneuerung die Schalter-Logik verloren.
+        \subsubsection{Zähler}
+            Zähler sind wie \textbf{Längen} ein Variablen-Typ mit denen in \LaTeX \@ programmiert werden kann. Mit Zählern regelt \LaTeX \@ (fast) alle Verweise im Dokument. Wie bei \textbf{Längen} können eigene Zähler definiert werden.
+            Diese können auch mit diversen Befehlen bearbeitet werden. Hierbei gibt es eine Liste vordefinierter Zähler:
+            \begin{itemize}
+                \item part
+                \item chapter
+                \item section
+                \item subsection
+                \item subsubsection
+                \item paragraph
+                \item subparagraph
+                \item page
+                \item equation
+                \item figure
+                \item table
+                \item footnote
+                \item mpfootnote
+            \end{itemize}
+            Für Listen gelten außerdem diese Zähler:
+            \begin{itemize}
+                \item enumi
+                \item enumii
+                \item enumiii
+                \item enumiv
+            \end{itemize}
+            Beispiel:
+            \lstset{language=TeX}
+            \begin{lstlisting}[frame=single]
+                \stepcounter{enumi}
+                \addtocounter{section}{zahl}
+                \setcounter{equation}{zahl}
 
-    % Ab Seite mit \renewcommand weitermachen!
+                \newcounter{numDoener}
 
+                \thenumDoener % Formatierter Text
+
+                \value{numDoener} % Wert unformatiert
+            \end{lstlisting}
+            Der Befehl \verb!\the! zeigt die Zähler an (ohne \verb!\!).  Das Besondere an \verb!\value! ist, ist dass der unformatierte Wert zum Gebrauch in Rechnungen genutzt werden kann.
+            \textbf{Zählerdarstellung:}
+            Mithilfe folgender Befehle kann die Darstellung von Zahlen mithilfe des \verb!\renewcommand! Befehls verändert werden.
+            \begin{enumerate}
+                \item \verb!\arabic! -- 1. 2. 3. ...
+                \item \verb!\roman! -- i. ii. iii. ...
+                \item \verb!\Roman! -- I. II. III. ...
+                \item \verb!\alph! -- a. b. c. ...
+                \item \verb!\Alph! -- A. B. C. ...
+            \end{enumerate}
+            Zur Änderung \textbf{aller} Aufzählungen des Dokuments wird \verb!\theenumi! usw. in der Präambel neu definiert.
+            Dies ist notwendig, da \LaTeX \@ anscheinend den Befehl indirekt zur Darstellung nutzt.
+            \lstset{language = TeX}
+            \begin{lstlisting}[frame = single]
+                \documentclass{article}
+
+                \renewcommand{\theenumi}{\Roman{enumi}}
+
+                \begin{document}
+                    \begin{enumerate}
+                        ...
+                    \end{enumerate}
+                \end{document}
+            \end{lstlisting}
+            Zur Änderung einer einzigen Aufzählung wird \verb!\theenumi! usw. direkt in der entsprechenden Aufzählung neu definiert.
+            \lstset{language = TeX}
+            \begin{lstlisting}[frame = single]
+                \documentclass{article}
+
+                \begin{document}
+                    \begin{enumerate}
+
+                        \renewcommand{...}
+
+                        ...
+                    \end{enumerate}
+                \end{document} 
+            \end{lstlisting}
 \end{document}
