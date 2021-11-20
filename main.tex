@@ -16,23 +16,20 @@
 
 \begin{document}
     \section{Grundlagen \LaTeX} 
-
     \subsection{Einführung}
-    Diese Übersicht soll das Schreiben nachträglich erleichtern. Für weitere Details schaue bitte in die .tex Datei hinein!
-    \LaTeX \@ ist eine Sammlung von Makros die in \textbf{TeX} programmiert sind. Das zu Grunde liegende \textbf{TeX}-System
-    ist eine Programmiersprache. Es gibt entsprechend für den Anwender viele Elemente einer Programmiersprache um den Textsatz
-    zu gestalten. Mithilfe von \textsl{Variablen} können alle Format-Eigenschaften eines Dokuments programmatisch geändert werden.
-    Hierbei gibt es verschiedene \textsl{Variablentypen}. Wichtig sind die \textsl{Längen-} und \textsl{Zählervariablen}.
-    Diese Variablen können über \LaTeX-Befehle verändert werden. Auf \textbf{TeX}-Ebene gibt es Kontrollstrukturen, also \textsl{if then}
-    Anweisungen, \textsl{Schleifen} und noch vieles mehr.
-
+        Diese Übersicht soll das Schreiben nachträglich erleichtern. Für weitere Details schaue bitte in die .tex Datei hinein!
+        \LaTeX \@ ist eine Sammlung von Makros die in \textbf{TeX} programmiert sind. Das zu Grunde liegende \textbf{TeX}-System
+        ist eine Programmiersprache. Es gibt entsprechend für den Anwender viele Elemente einer Programmiersprache um den Textsatz
+        zu gestalten. Mithilfe von \textsl{Variablen} können alle Format-Eigenschaften eines Dokuments programmatisch geändert werden.
+        Hierbei gibt es verschiedene \textsl{Variablentypen}. Wichtig sind die \textsl{Längen-} und \textsl{Zählervariablen}.
+        Diese Variablen können über \LaTeX-Befehle verändert werden. Auf \textbf{TeX}-Ebene gibt es Kontrollstrukturen, also \textsl{if then}
+        Anweisungen, \textsl{Schleifen} und noch vieles mehr.
     \subsection{Böse Sachen}
         Zuerst einmal Sachen die \textbf{NICHT} schön sind:
         \begin{enumerate}
             \item Manuelle Leerzeichen mit \textbackslash \textbackslash
             \item Andauernd \verb!\textbf{...}! verwenden. Lieber Betonungen (emph...)!
         \end{enumerate} 
-    
     \subsection{Struktur}
         Der Textkörper wird mit Abschnitts-Befehlen strukturiert. Diese unterscheiden sich nach Typ des Dokumentes (z.B. \textbf{article}). Jedoch gelten diese Befehle für alle:
         \begin{itemize}
@@ -47,15 +44,13 @@
             \item \verb!\paragraph!
             \item \verb!\subparagraph!
         \end{itemize}
-
     \subsection{Zeichen}
         Folgende Zeichen können \textbf{nicht} einfach so eingetippt werden:
         \begin{itemize}
             \item \& \@ \% \@ \$ \@ \# \@ \_ \@ \{ \@ \} \@ \~ \@ \^ \@
         \end{itemize}
         Diese können mit der Kombination aus dem \textbackslash \@ Befehl und dem jeweiligen Zeichen erzeugt werden (\em Escape-Befehl\normalfont).  % Hier wird der unäre Befehl genommen (Schalter)
-        Um Leerzeichen zu forcieren kann \verb!\@! benutzt werden. Ein Bindestrich kann mit \verb!--! eingefügt werden.
-
+        Um Leerzeichen zu forcieren kann \verb!\@! benutzt werden. Ein Bindestrich kann mit \verb!--! eingefügt werden. Mit dem Tilde Symbol kann ein gesperrtes Leerzeichen erzeugt werden (verhindert einen Zeilenumbruch).
     \subsection{Textformatierungen}
         \LaTeX \@ unterstützt folgende physische Textformatierungen:
         \begin{itemize}
@@ -64,9 +59,8 @@
             \item \verb!\textsl{slanted}! -- \textsl{slanted}
             \item \verb!\textsc{small caps}! -- \textsc{small caps}
         \end{itemize}
-
     \subsection{Schriftgrößen}
-    Folgende lokalen Schriftgrößenänderungen sind in \LaTeX \@ möglich:
+        Folgende lokalen Schriftgrößenänderungen sind in \LaTeX \@ möglich:
     \begin{enumerate}
         \item \verb!\tiny!
         \item \verb!\scriptsize!
@@ -80,18 +74,16 @@
         \item \verb!\Huge!
     \end{enumerate}
     Um die Schriftgröße für das gesamte Dokument zu ändern gibt es Präambel-Befehle.
-
     \subsection{Umgebungen}
-    Eine Umgebung schließt einen Text mit \verb!\begin{Umgebung}! und \verb!\end{Umgebung}! ein. Innerhalb der Umgebung gelten eigene und spezielle Regeln. Wichtige Beispiele sind:
+        Eine Umgebung schließt einen Text mit \verb!\begin{Umgebung}! und \verb!\end{Umgebung}! ein. Innerhalb der Umgebung gelten eigene und spezielle Regeln. Wichtige Beispiele sind:
     \begin{itemize}
         \item enumerate (Aufzählung)
         \item itemize (Liste)
         \item equation (mathematische Gleichung)
         \item description (Lexikon ähnliche Aufzählung)
     \end{itemize}
-
     \subsection{Listings}
-    Listings enthalten nicht-formatierten Text, der wichtig zur Darstellung von Quellcode jeglicher Programmiersprachen ist.
+        Listings enthalten nicht-formatierten Text, der wichtig zur Darstellung von Quellcode jeglicher Programmiersprachen ist.
     \lstset{language=C}
     \begin{lstlisting}[frame=single]
         int main(int argc, char* argv[]) 
@@ -100,14 +92,15 @@
         }
     \end{lstlisting}
     Mit den Optionen \verb!\lstset{language=C}!, sowie \verb!\begin{lstlisting}[frame=single]! können die Programmiersprache festgelegt und der Textrahmen aktiviert werden.
+    Möchte man jedoch nur eine Textbox erstellen, so kann man dies auch mit dem \verb!\fbox! Befehl tun.
 
     \subsection{Externe Dokumente}
-    Mithilfe des \verb!\input{file}! Befehls können weitere \emph{.tex} Dateien in das Dokument so eingefügt werden, als würde der Inhalt der Datei im Originaldokument stehen.
-    Dabei können die Pfadangaben \emph{relativ} oder \emph{absolut} sein. Den Unterdokumenten muss eine extra Zeile am Anfang eingefügt werden, die auf das Master Dokument hinweist. Alternativ kann im \emph{TexMaker}
-    das Master Dokument über das Menü Optionen eingestellt werden.
+        Mithilfe des \verb!\input{file}! Befehls können weitere \emph{.tex} Dateien in das Dokument so eingefügt werden, als würde der Inhalt der Datei im Originaldokument stehen.
+        Dabei können die Pfadangaben \emph{relativ} oder \emph{absolut} sein. Den Unterdokumenten muss eine extra Zeile am Anfang eingefügt werden, die auf das Master Dokument hinweist. Alternativ kann im \emph{TexMaker}
+        das Master Dokument über das Menü Optionen eingestellt werden.
     \subsection{Längen}
-    Mithilfe des \verb!\setlength{variable}{länge}! Befehls können die in \textbf{TeX} auftretenden Längen verändert werden. \textbf{Alle Längen haben eine Einheit!}
-    Wichtige Variablen sind zum Beispiel:
+        Mithilfe des \verb!\setlength{variable}{länge}! Befehls können die in \textbf{TeX} auftretenden Längen verändert werden. \textbf{Alle Längen haben eine Einheit!}
+        Wichtige Variablen sind zum Beispiel:
     \begin{itemize}
         \item \verb!\parindent! - Definiert den Einzug eines Absatzes
         \item \verb!\parskip! - Definiert den Abstand zwischen zwei Absätzen
@@ -261,4 +254,30 @@
                     \end{enumerate}
                 \end{document} 
             \end{lstlisting}
+    \subsection{Querverweise}
+        Querverweise verweisen auf einen anderen Textteil. Diese Querverweise sind automatisiert und gebrauchen die Zähler.
+        Dazu wird mit \verb!\label! ein referenzierbarer Name erzeugt, der dann mit \verb!\ref! gebraucht werden kann.
+        Hierbei hat es sich im allgemeinen durchgesetzt, vor dem eigentlichen Labelnamen eine Bezeichnung einzufügen,
+        die diese Verweisart beschreibt. Für Verweise auf Abschnitte schreibt man dazu einfach ein '\textbf{sec:}' vor den Labelnamen.
+        \lstset{language = TeX}
+        \begin{lstlisting}[frame = single]
+            \section{Stand der Technik} 
+            \label{sec:standTechnik}
+            .
+            .
+            .
+            Wie in Abschnitt ~\ref{sec:standTechnik}...
+        \end{lstlisting}
+        Das Label muss hierbei \textbf{direkt hinter dem referenzierten Objekt stehen!}
+        Weitere Labelgruppen lauten wie folgt:
+        \begin{itemize}
+            \item sec:Abschnitt
+            \item fig:Abbildung
+            \item table:Tabelle
+            \item eqn:Gleichung
+            \item fn:Fußnote
+            \item item:Aufzählungspunkt
+        \end{itemize}
+        Wenn an Stelle des Zählerwertes die Seite referenziert werden soll, auf der das Objekt steht, so gebraucht man den \verb!\pageref! Befehl.
+    \subsection{Gleitobjekte}
 \end{document}
