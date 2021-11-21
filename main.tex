@@ -280,4 +280,69 @@
         \end{itemize}
         Wenn an Stelle des Zählerwertes die Seite referenziert werden soll, auf der das Objekt steht, so gebraucht man den \verb!\pageref! Befehl.
     \subsection{Gleitobjekte}
+    \LaTeX \@ stellt zwei Umgebungen zur Verfügung, deren Position variabel ist:
+    \begin{enumerate}
+        \item figure
+        \item table
+    \end{enumerate}
+    Diese Objekte gleiten durch den Text, d.h. die genaue Position wird erst beim Kompilieren festgelegt.
+    Die Position hängt vom restlichem Layout ab und kann sich entsprechend mit einer Textänderung verschieben.
+    Gleitobjekte sind also erst einmal nur Umgebungen mit einer variablen Postion, einer Beschriftung und einem Label.
+    Der Inhalt ist völlig egal. Er kann Text, Formeln oder Bilder und Tabellen sein.
+    Allerdings sind die Bildunterschriften an die Umgebung gebunden, d.h. eine figure-Umgebung wird mit 'Abb.' im Text gekennzeichnet.
+    Die gewünschte Positionierung wird über ein optionales Argument übergeben. Die Positionen sind:
+    \begin{itemize}
+        \item \textbf{h}ere
+        \item \textbf{t}op
+        \item \textbf{b}ottom
+        \item \textbf{p}age
+    \end{itemize}
+    Je nach Inhalt der Seite versucht \LaTeX \@ das Gleitobjekt in der angegebenen Reihenfolge der Positionen zu setzen (links nach rechts).
+    \lstset{language = TeX}
+    \begin{lstlisting}[frame = single]
+        \begin{figure}[htbp]
+            % Bild, Beschriftung, Referenz
+        \end{figure}
+    \end{lstlisting}
+    Bilder und Tabellen bekommen üblicherweise eine Bildunterschrift mit dem Befehl \verb!\caption!.
+    Diese Beschriftung geht in das Abbildungs- oder Tabellenverzeichnis ein (\verb!\listoffigures! bzw. \verb!\listoftables!).
+    Optional kann \verb!\caption! eine kürzere Beschriftung für die Verzeichnisse erhalten.
+    \lstset{language = TeX}
+    \begin{lstlisting}[frame = single]
+        \begin{figure}[htbp]
+            \fbox{Mein Bild in Text}
+            \caption[Bild]{Textbild}
+            \label{fig:tb1} % Referenz
+        \end{figure}
+    \end{lstlisting}
+    \textbf{Wichtig:} Bei den Gleitobjekten table und figure muss das Label hinter der \verb!\caption! stehen!
+    Mithilfe des \verb!\centering! Befehls können sowohl die Abbildung als auch die Beschriftung mittig zentriert werden.
+    \subsection{Grafiken}
+    Für die Einbindung von Grafiken benutzen wir das Paket \textsl{graphicx}.
+    Das Paket stellt den Befehl \verb!\includegraphics! zur Verfügung.
+    pdfLaTeX unterstützt dann 3 Grafik-Formate:
+    \begin{enumerate}
+        \item .pdf (Vektor)
+        \item .png (Raster)
+        \item .jpg (Raster)
+    \end{enumerate}
+    Optimalerweise sollte eine Grafik so eingebunden werden:
+    \lstset{language = TeX}
+    \begin{lstlisting}[frame = single]
+        \newlength{\imgWidth}
+        \setlength{\imgWidth}{0.9\textwidth}
+        ...
+        \includegraphics[width=\imgWidth]{bild}
+    \end{lstlisting}
+    Der Befehl \verb!\includegraphics! hat diverse Parameter:
+    \lstset{language = TeX}
+    \begin{lstlisting}[frame = single]
+        width = xx
+        heigth = xx
+        keepaspectratio = (true/false)
+        scale = xx % als Faktor
+        angle = xx % in Grad
+        ... und noch viele mehr.
+    \end{lstlisting}
+    \textbf{Tipp:} Möchte man den Kompiliervorgang und die Dateigröße verringern, so kann man in der \verb!\documentclass! die Angabe \textsl{draft} hinzufügen.
 \end{document}
