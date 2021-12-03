@@ -15,6 +15,7 @@
 % Ein schönes Template gibt es hier: http://www.latextemplates.com/template/journal-article
 
 \begin{document}
+    \tableofcontents
     \section{Grundlagen \LaTeX} 
     \subsection{Einführung}
         Diese Übersicht soll das Schreiben nachträglich erleichtern. Für weitere Details schaue bitte in die .tex Datei hinein!
@@ -345,4 +346,46 @@
         ... und noch viele mehr.
     \end{lstlisting}
     \textbf{Tipp:} Möchte man den Kompiliervorgang und die Dateigröße verringern, so kann man in der \verb!\documentclass! die Angabe \textsl{draft} hinzufügen.
+    \subsection{Literatur}
+        Mithilfe des Pakets \emph{biblatex} und dem Tool \emph{Zotero} oder \emph{Citavi} kann ganz einfach eine Literaturverwaltung in \LaTeX \@ erfolgen.
+        In den eckigen Klammern des \verb!\usepackage! Befehls können dann Einstellungen vorgenommen werden, um z.B. den Zitationsstil zu ändern.
+        \lstset{language = TeX}
+        \begin{lstlisting}[frame = single]
+\usepackage[style = ieee, citestyle = ieee]{biblatex}
+        \end{lstlisting}
+        Anschließend kann in der \emph{Präambel} mit dem \verb!\addbibresource! Befehl eine \emph{.bib} Datei aus \emph{Zotero} eingebunden werden.
+        Wichtig ist hierbei, dass bei dem Export die Zeichencodierung auf \textbf{UTF-8} eingestellt werden muss, da sonst Sonderzeichen/Umlaute in dem Literaturverzeichnis nicht angezeigt werden können.
+        Nun kann an beliebiger Stelle auf Literatur verwiesen werden, indem man das Autorenkürzel (zu entnehmen aus \emph{.bib} Datei) in den \verb!\cite{Kürzel}! Befehl einfügt.
+        Um das Literaturverzeichnis darzustellen, nutzt man den \verb!\printbibliography! Befehl. Falls dann das Literaturverzeichnis nicht angezeigt wird, muss die Datei mehrmals kompiliert werden.
+        Das Problem taucht auch auf, wenn noch kein Verweis im Text auf einen Eintrag in der \emph{.bib} Datei getätigt worden ist.
+        Es ist auch möglich, das Literaturverzeichnis in Unterkapitel oder Kategorien zu unterteilen.
+        Beispielsweise kann so eine Kategorisierung nach Dokumententyp (Auszug aus Fachzeitschrift, Lehrbuch, etc.) erfolgen.
+        Dazu fügt man dem \verb!\printbibliography! Befehl etwaige Parameter zur Filterung der Literatur hinzu.
+        \textbf{Sonstiges:} Fügt man dem \emph{usepackage} Befehl den Parameter \emph{backend = biber} hinzu, so wird der \emph{biber} backend bibliography processor für \emph{biblatex} geladen.
+        \emph{biber} behebt dabei einige Probleme von \emph{bibtex} (richtige Sortierung mit Unicodeunterstützung, Speicherbedarf, Codierungen, etc.).
+        Anschließend kann mithilfe der \verb!\ExecuteBibliographyOptions{}! Anweisung zum Beispiel die Sortierung von Autor, Titel und Jahr verändert werden:
+        \lstset{language = TeX}
+        \begin{lstlisting}[frame = single]
+    \ExecuteBibliographyOptions{
+        sorting = nyt, % Sortierung Autor, Titel, Jahr
+        bibwarn = true, % Probleme (Backend) anzeigen
+        isbn = false, % Keine ISBN anzeigen
+        url = false % Keine URL anzeigen
+    }
+        \end{lstlisting}
+    \subsection{Farben}
+        Farblicher Text kann besonders zur Hervorhebung eingesetzt werden. Um in \LaTeX \@ möglichst flexibel und leicht Textpassagen einfärben zu können, nutzt man das \emph{xcolor} Paket.
+        Dessen Befehl \verb!\textcolor! kann unter Angabe der Farbe als ersten Parameter nun eine Textpassage einfärben.
+        Die Farbe kann dabei eine der gängigen Farben (rot, gelb, grün, blau, usw.) sein. Möchte man eine größere Farbpalette nutzen, so kann man auch auf den RGB Farbraum zurückgreifen.
+        Dazu definiert man sich einfach eine neue Farbe wie folgt:
+        \lstset{language = TeX}
+        \begin{lstlisting}[frame = single]
+            \definecolor{farbe1}{RGB}{0, 255, 255}
+        \end{lstlisting}
+    \subsection{Sonstiges}
+        Hier findest du sonstige Anweisungen und anderes nützliches Wissen:
+        \begin{itemize}
+            \item * Befehle lassen die Aufzählung verschwinden (z.B. \verb!\section*{}!)
+            \item \verb!\tableofcontents! erzeugt ein Inhaltsverzeichnis
+        \end{itemize}  
 \end{document}
