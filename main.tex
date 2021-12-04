@@ -4,6 +4,7 @@
 \usepackage[utf8]{inputenc}    % inputenc: Stellt die Zeicheneingabe fuer Umlaute (in den Editor) sicher
 \usepackage[T1]{fontenc}       % T1: Zeichenmenge für westeuropäische Länder | fontenc: Angepasste Zeichendarstellung in der PDF
 \usepackage{listings}
+\usepackage{lmodern}
                                % PRÄAMBEL
 
 % In der Präambel werden Formate für das gesamte Dokument festgelegt, Pakete geladen und eigene Befehle definiert.
@@ -373,6 +374,12 @@
         url = false % Keine URL anzeigen
     }
         \end{lstlisting}
+        \textbf{Zitate:} Die Handhabung von Zitaten/Quotations gestaltet sich mithilfe des \emph{csquotes} Pakets als einfach.
+        Die Einbindung geschieht dabei wie folgt:
+        \lstset{language = TeX}
+        \begin{lstlisting}[frame = single]
+        \usepackage[babel, german = quotes]{csquotes}
+        \end{lstlisting}
     \subsection{Farben}
         Farblicher Text kann besonders zur Hervorhebung eingesetzt werden. Um in \LaTeX \@ möglichst flexibel und leicht Textpassagen einfärben zu können, nutzt man das \emph{xcolor} Paket.
         Dessen Befehl \verb!\textcolor! kann unter Angabe der Farbe als ersten Parameter nun eine Textpassage einfärben.
@@ -382,10 +389,12 @@
         \begin{lstlisting}[frame = single]
             \definecolor{farbe1}{RGB}{0, 255, 255}
         \end{lstlisting}
+        Um die Seitenfarbe zu ändern nutzt man die Anweisung \verb!\pagecolor!. Eine Farbe kann auch mit dem Befehl \verb!\color! standardmäßig festgelegt werden (Default Schriftfarbe).
     \subsection{Sonstiges}
         Hier findest du sonstige Anweisungen und anderes nützliches Wissen:
         \begin{itemize}
             \item * Befehle lassen die Aufzählung verschwinden (z.B. \verb!\section*{}!)
             \item \verb!\tableofcontents! erzeugt ein Inhaltsverzeichnis
-        \end{itemize}  
+            \item \verb!\noindent! Verhindert das automatische Einrücken der ersten Zeile
+        \end{itemize}
 \end{document}
