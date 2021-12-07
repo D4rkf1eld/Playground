@@ -98,7 +98,10 @@
 
     \subsection{Externe Dokumente}
         Mithilfe des \verb!\input{file}! Befehls können weitere \emph{.tex} Dateien in das Dokument so eingefügt werden, als würde der Inhalt der Datei im Originaldokument stehen.
-        Dabei können die Pfadangaben \emph{relativ} oder \emph{absolut} sein. Den Unterdokumenten muss eine extra Zeile am Anfang eingefügt werden, die auf das Master Dokument hinweist. Alternativ kann im \emph{TexMaker}
+        Die eingebundene Datei wird als normaler Teil des Quelltexts mitverarbeitet und sollte daher auch aus \LaTeX \@ Befehlen bestehen.
+        Hierbei muss man allerdings beachten, dass die Präambel nur im Hauptdokument definiert werden darf (Pakete werden also nur im Hauptdokument geladen).
+        Somit entfällt also auch die Kennzeichnung der Umgebung \emph{document}.
+        Die Pfadangaben können entweder \emph{relativ} oder \emph{absolut} sein. Den Unterdokumenten muss eine extra Zeile am Anfang eingefügt werden, die auf das Master Dokument hinweist. Alternativ kann im \emph{TexMaker}
         das Master Dokument über das Menü Optionen eingestellt werden.
     \subsection{Längen}
         Mithilfe des \verb!\setlength{variable}{länge}! Befehls können die in \textbf{TeX} auftretenden Längen verändert werden. \textbf{Alle Längen haben eine Einheit!}
