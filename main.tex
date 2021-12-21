@@ -393,6 +393,26 @@
             \definecolor{farbe1}{RGB}{0, 255, 255}
         \end{lstlisting}
         Um die Seitenfarbe zu ändern nutzt man die Anweisung \verb!\pagecolor!. Eine Farbe kann auch mit dem Befehl \verb!\color! standardmäßig festgelegt werden (Default Schriftfarbe).
+    \subsection{Formeln}
+        Die Darstellung von mathematischen Formeln ist einer der Grundpfeiler für \LaTeX.
+        \emph{amsmath} und \emph{amssymb} sind die standard Pakete, die zur mathematischen Darstellung zusätzlich geladen werden.
+        AMS steht dabei für \emph{American Mathematical Society}.
+        \subsubsection{Die math-Umgebung}
+            Die \emph{math-Umgebung} schaltet \LaTeX \@ in den Mathe-Modus.
+            Innerhalb dieser Umgebung gelten ganz andere Formatierungsregeln als im Text.
+            Zur Erzeugung gibt es zwei Möglichkeiten:
+           \begin{itemize}
+               \item Erstellung im Fließtext mit \$\dots\$
+               \item Freistehende Gleichung mit diversen Umgebungen
+           \end{itemize}
+        \subsubsection{Equation Umgebung}
+        Eine einzelne Gleichung wird mit der Umgebung \emph{equation} angegeben.
+        Die Gleichung wird dann nicht im Fließtext sondern freistehend formatiert.
+        \begin{equation}
+            n_1\sin\alpha = n_2\sin\beta
+        \end{equation}
+        \huge \textbf{Weiter mit S. "Einige Grundregeln".}
+        \normalfont
     \subsection{Sonstiges}
         Hier findest du sonstige Anweisungen und anderes nützliches Wissen:
         \begin{itemize}
