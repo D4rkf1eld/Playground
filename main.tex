@@ -1,10 +1,14 @@
                                % PRÄAMBEL              
-\documentclass[10pt]{article}  % article: Typ des LaTeX Dokuments
+\documentclass[10pt]{scrartcl}  % article: Typ des LaTeX Dokuments | scrartcl ist eine KOMA-Klasse (KOMA, da der Entwickler Kohm heißt?)
 \usepackage[ngerman]{babel}    % ngerman: Neue deutsche Rechtschreibung (Silbentrennung u.w.) | babel: Ändert die Spracheinstellungen
 \usepackage[utf8]{inputenc}    % inputenc: Stellt die Zeicheneingabe fuer Umlaute (in den Editor) sicher
 \usepackage[T1]{fontenc}       % T1: Zeichenmenge für westeuropäische Länder | fontenc: Angepasste Zeichendarstellung in der PDF
 \usepackage{listings}          % Mithilfe der eckigen Klammern, die immer zuerst nach dem usepackage stehen müssen, können Argumente/Parameter übergeben werden
 \usepackage{lmodern}
+\usepackage{a4wide}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{hyperref}
                                % PRÄAMBEL
 
 % In der Präambel werden Formate für das gesamte Dokument festgelegt, Pakete geladen und eigene Befehle definiert.
@@ -393,6 +397,182 @@
             \definecolor{farbe1}{RGB}{0, 255, 255}
         \end{lstlisting}
         Um die Seitenfarbe zu ändern nutzt man die Anweisung \verb!\pagecolor!. Eine Farbe kann auch mit dem Befehl \verb!\color! standardmäßig festgelegt werden (Default Schriftfarbe).
+    \subsection{Tabellen}
+        Für Tabellen wird das Gleitobjekt \emph{table} verwendet. 
+        Das heißt, Tabellen können auch referenziert werden (mithilfe des \emph{label}) und bekommen eine Abbildungsunterschrift.
+        Dadurch sind sie dann auch in der Tabellenliste enthalten (\verb!\listoftables!).
+        Auch wird hier die Position über die Attribute \emph{[htbp]} festgelegt.
+        Die Tabellen-Umgebung \textbf{erzeugt selbst keine Tabelle!}
+        Das Erzeugen einer Tabelle entsteht durch das Einfügen einer Umgebung in die \emph{table}-Umgebung.
+        Diese Umgebung heißt \emph{tabular}.
+        Die \emph{tabular} Umgebung hat ein erforderliches Argument, welches das Aussehen der Tabelle festlegt.
+        Jeder Buchstabe in diesem Argument steht für eine Spalte.
+        Dadurch wird die Anzahl der Spalten festgelegt.
+        Die Spalte kann links- oder rechtsbündig orientiert oder zentriert sein (l, r oder c).
+        Mithilfe von zwei Zeichen kann so eine Tabelle aufgebaut werden.
+        Das Symbol \& zeigt eine neue \textbf{Zelle} an und \verb!\\! erzeugt eine neue Zeile.
+        Das sieht dann so aus:
+        \lstset{language = TeX}
+        \begin{lstlisting}[frame = single]
+        \begin{table}[htbp]
+            \centering
+            \begin{tabular}{lcr}
+                Messung & Spannung & Strom \\
+                1 & 2 & 3 \\
+                4 & 5 & 6
+            \end{tabular}
+            \caption[Messreihe]{Induktionsspannung}
+            \label{tab:messreihe}
+        \end{table}
+        \end{lstlisting}
+        Letzendlich sieht die Tabelle dann so aus:
+        \begin{table}[htbp]
+            \centering
+            \begin{tabular}{lcr}
+                Messung & Spannung & Strom \\
+                1 & 2 & 3 \\
+                4 & 5 & 6
+            \end{tabular}
+            \caption[Messreihe]{Induktionsspannung}
+            \label{tab:messreihe}
+        \end{table}
+        \subsubsection{Gestaltung der Tabelle}
+            Standardmäßig setzt \LaTeX \@ die Tabelle so breit, wie der Inhalt ist.
+            Dabei findet, wenn erforderlich, kein Umbruch statt!
+            Jedoch ist es möglich, die Breite einer Spalte mit dem Argument \verb!p{breite}! vorzugeben.
+            Dann wird der Inhalt immer linksbündig umgebrochen.
+            Am schönsten ist es hier natürlich, sich für die Spaltenbreite eine eigene Länge zu definieren.
+            Die Zwischenräume zwischen den Zellen können auf zwei Weisen angepasst werden:
+            \begin{enumerate}
+                \item Mithilfe der Länge \verb!\tabcolsep! (Verändert \textbf{alle} Spalten!)
+                \item Mithilfe von \verb!@{zwischenraum}!
+            \end{enumerate}
+            Der Befehl \verb!@{zwischenraum}! wird im Argument von \emph{tabular} verwendet.
+            Damit kann für jede Spalte individuell der Zwischenraum angepasst werden.
+            \lstset{language = TeX}
+            \begin{lstlisting}[frame = single]
+            ...
+            \begin{tabular}{c@{\hspace{1cm}}cc}
+            ...
+            \end{tabular}
+            ...
+            \end{lstlisting}
+            Der Befehl \verb!\hspace! erzeugt einfach einen horizontalen Freiraum.
+            Um die Tabelle strukturiert aussehen zu lassen, werden häufig Gitterlinien eingesetzt.
+            Diese sind in wissenschaftlichen Arbeiten \textbf{rein horizontal}.
+            Möchte man trotzdessen vertikale Trennstriche in die Tabelle einfügen, so kann man dies mit dem Pipe-Symbol im Argument machen (z.B. |c|c|c).
+            Hierfür wird das Paket \emph{booktabs} benötigt.
+            Das Paket stellt gutaussehende horizontale Linien zur Verfügung.
+            Es werden drei Befehle mitgeliefert:
+            \begin{enumerate}
+                \item \verb!\toprule! (Trennung oberhalb der Überschrift)
+                \item \verb!\midrule! (Trennung zwischen Überschrift und Inhalt)
+                \item \verb!\bottomrule! (Tabellenunterstrich)
+            \end{enumerate}
+        \subsubsection{Formatierungen}
+            Das Paket \emph{array} stellt weitere Befehle zur Formatierung der Spalten zur Verfügung.
+            Diese Formatierungen werden auch direkt in das Argument von \emph{tabular} eingesetzt.
+            Zum einen bietet \emph{array} Prä- und Suffixe innerhalb des \emph{tabular}-Argumentes an.
+            Damit kann jede Spalte einzeln formatiert werden.
+            Es ist möglich fast alle Formatierungsbefehle (\verb!\textbf!, \verb!\textsc!, etc.) zu verwenden.
+            Dadurch, dass jede der Formatierungen innerhalb der eigenen Zelle eingesperrt ist, können auch Formatierungen mit Schalter-Logik verwendet werden.
+            Ein Beispiel mit \textbf{Präfixen} sieht dann so aus:
+            \lstset{language = TeX}
+            \begin{lstlisting}[frame = single]
+            ...
+            \begin{tabular}{>{\it}c >{\bf}c >{\sl}c}
+            ...
+            \end{tabular}
+            ...
+            \end{lstlisting}
+            \textbf{Suffixe} sind etwas komplizierter:
+            \lstset{language = TeX}
+            \begin{lstlisting}[frame = single]
+            ...
+            \begin{tabular}{c||<{\,MW} |<{\,MWh}}
+            ...
+            \end{tabular}
+            ...
+            \end{lstlisting}
+            Auffallend ist, dass das Positionsargument bei Präfixen rechts steht und bei Suffixen links.
+            Weiter bietet \emph{array} neben den standardmäßigen Spaltentypen l, c, r und \verb!p{}! und den Prä- und Suffixen auch zwei neue Spaltentypen.
+            \verb!m{breite}! und \verb!b{breite}! sind jeweils linksbündig und umbrechend. Jedoch ist \verb!m! vertikal zentriert und \verb!b! ist vertikal nach oben zentriert.
+            Für die horizontale Orientierung müssen allerdings neue Befehle her.
+            Neue Spaltentypen können mit dem Befehl \verb!\newcolumntype! erzeugt werden.
+            Dies kann dann so aussehen:
+            \lstset{language = TeX}
+            \begin{lstlisting}[frame = single]
+\newcolumntype{L}[1]{>{\raggedright\hspace{0pt}}p{#1}}
+            \end{lstlisting}
+            Hierbei wird ein neuer Spaltentyp \textbf{L} erzeugt, der 1 Argument entgegennehmen kann.
+            Der eigentliche, maskierte Spaltentyp \verb!p{}! wird um einen \verb!\hspace! erweitert, der die Silbentrennung aktiviert.
+            Gleichzeitig wird mit dem \verb!\raggedright! Befehl die Bündigkeit auf links gesetzt (horizontale Orientierung).
+            Der nun erzeugte Spaltentyp kann dann wie folgt eingesetzt werden:
+            \lstset{language = TeX}
+            \begin{lstlisting}[frame = single]
+            \begin{table}[htbp]
+                ...
+                \begin{tabular}{cL{50pt}cL{50pt}cL{50pt}}
+                ...
+                \end{tabular}
+                ...
+            \end{table}
+            \end{lstlisting}
+            Um die genannten Befehle innerhalb nur einer Zelle zu verwenden, können einfach neue Befehle definiert werden, die dann innerhalb dieser Zelle angewendet werden.
+            \lstset{language = TeX}
+            \begin{lstlisting}[frame = single]
+% Tabellenabschnitt linksbuendig
+\newcommand{\ltab}{\raggedright\arraybackslash\hspace{0pt}} 
+% und fuer links und rechts
+            \end{lstlisting}
+            Hier ist eine sehr schöne Tabelle aus der Vorlesung:
+            \begin{table}[htbp]
+                \centering
+                \begin{tabular}{cl@{\hspace{1cm}}l<{\,MW\hspace{1cm}} l<{\,MWh}} \toprule
+                \# & \textbf Name & \textbf Leistung in & \textbf Speicher in \\
+                \midrule
+                1 & Gemasolar & 20 & 300\\
+                2&Valle1& 50&375\\
+                \bottomrule
+                \end{tabular}
+                \caption{Liste von Solarkraftwerken in Spanien}
+                \label{tab:cspSpain}
+                \end{table}
+    Manchmal möchte man zwei Spalten zu einer zusammenfassen. 
+    Dies ist mit dem \verb!\multicolum! Befehl möglich.
+    Der Befehl besitzt 3 Argumentenfelder:
+    \begin{enumerate}
+        \item Anzahl der Spalten
+        \item Ausrichtung (l, c, r)
+        \item Inhalt
+    \end{enumerate}
+    Der Befehl steht dann anstelle der gleichen Anzahl an Stellen mitten in der Tabelle:
+    \lstset{language = TeX}
+    \begin{lstlisting}[frame = single]
+    \begin{table}[htbp] 
+        \centering 
+        \begin{tabular}{clll}
+            & & \multicolumn{2}{l}{Technische Daten} \\
+
+            \# & \bf Name & \bf Leistung in & \bf Energie in \\
+        ...
+        \end{tabular}
+        ... \end{table}
+    \end{lstlisting}
+    Natürlich gibt es zur Tabellenerstellung viele weitere Pakete und Möglichkeiten.
+    Hier sind ein paar aufgelistet:
+    \begin{itemize}
+        \item longtable: Tabellen über mehr als eine Seite
+        \item tabularx: Hilfestellung bei der Berechnung von Breiten
+        \item ltxtable: Kombination aus den oberen Beiden
+        \item rotating: gedrehte Tabellen
+        \item multirow: mehrere Zeilen (ähnlich zu multicolumn)
+    \end{itemize}
+    Im Internet gibt es außerdem Tabellen-Rechner:
+    \begin{itemize}
+        \item \href{http://truben.no/latex/table/}{Truben Table Editor}
+        \item \href{http://www.tablesgenerator.com}{Tables Generator}
+    \end{itemize}
     \subsection{Formeln}
         Die Darstellung von mathematischen Formeln ist einer der Grundpfeiler für \LaTeX.
         \emph{amsmath} und \emph{amssymb} sind die standard Pakete, die zur mathematischen Darstellung zusätzlich geladen werden.
@@ -419,5 +599,11 @@
             \item * Befehle lassen die Aufzählung verschwinden (z.B. \verb!\section*{}!)
             \item \verb!\tableofcontents! erzeugt ein Inhaltsverzeichnis
             \item \verb!\noindent! Verhindert das automatische Einrücken der ersten Zeile
+            \item \verb!\,! erlaubt einen geringen Abstand (z.B. zu Einheiten)
+            \item \verb!\raggedleft! und \verb!\raggedright! verändern die Bündigkeit
+            \item Das hyperref Paket erlaubt die Nutzung von Links im Dokument
+            \begin{itemize}
+                \item Mithilfe des \verb!\href! Befehls kann eine Umleitung erfolgen 
+            \end{itemize}
         \end{itemize}
 \end{document}
