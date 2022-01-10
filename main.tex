@@ -588,12 +588,31 @@
         \subsubsection{Equation Umgebung}
         Eine einzelne Gleichung wird mit der Umgebung \emph{equation} angegeben.
         Die Gleichung wird dann nicht im Fließtext sondern freistehend formatiert.
+        In dieser Umgebung werden die Gleichungen automatisch durchnummeriert.
+        Mit der equation* Umgebung kann dies vermieden werden.
         \begin{equation}
             n_1\sin\alpha = n_2\sin\beta
         \end{equation}
-        \huge \textbf{Weiter mit S. "Einige Grundregeln".}
-        \normalfont
-    \subsection{Sonstiges}
+        \subsubsection{Eigenheiten}
+        Ein Leerzeichen wird als Multiplikation interpretiert. 
+        Alle Buchstaben werden als Variablen interpretiert.
+        Um einen Index zu erzeugen, schreibt man hinter die Variable einen Unterstrich mit dem entsprechenden Index.
+        Folgende Zeichen können direkt in eine equation-Umgebung eingegeben werden:
+        +-=!/()[]<>|':.
+        Eine Multiplikation kann mit den folgenden Befehlen explizit hervorgerufen werden:
+        \begin{itemize}
+            \item \verb!\cdot!
+            \item \verb!\times!
+        \end{itemize}
+        In der Umgebung werden griechische Buchstaben einfach ausgeschrieben.
+        Hierbei ist zu beachten, dass große griechische Buchstaben groß geschrieben werden müssen.
+        Auch für die gängigen Funktionen gibt es explizite Befehle.
+        Diese müssen genutzt werden, da sonst die Buchstaben des Funktionsnamen als Variable interpretiert werden.
+        Dadurch sind die Funktionsnamen dann auch nicht mehr kursiv!
+        Um eine Hoch- oder eine Tiefstellung zu erzeugen, nutzt man die Befehle \verb!_! (tiefgestellt) und \verb!^! (hochgestellt).
+        Das Argument muss hierbei mit geschweiften Klammern geklammert werden, da sonst z.B. nicht alle Variablen im Exponent landen würden.
+        \textbf{Weiter auf Seite "Hoch- und Tiefgestellt, wo die 4 Formeln zu sehen sind!}
+        \subsection{Sonstiges}
         Hier findest du sonstige Anweisungen und anderes nützliches Wissen:
         \begin{itemize}
             \item * Befehle lassen die Aufzählung verschwinden (z.B. \verb!\section*{}!)
